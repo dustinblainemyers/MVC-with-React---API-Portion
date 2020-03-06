@@ -1,0 +1,19 @@
+{
+  "name": "expresspractice2",
+  "version": "1.0.0",
+  "description": "Practice with creating a multipage express app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "express"
+  ],
+  "author": "Dustin Myers",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-es6-template-engine": "^2.2.1"
+  }
+}
