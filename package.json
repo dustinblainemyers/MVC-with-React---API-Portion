@@ -1,7 +1,7 @@
 {
-  "name": "expresspractice2",
+  "name": "green_light_red_light",
   "version": "1.0.0",
-  "description": "Practice with creating a multipage express app",
+  "description": "Green Light Red Light Application",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -6,10 +6,10 @@ const express = require('express'),
 
         res.render('template', {
             locals: {
-                title: 'Home'
+                title: 'Create Presentation'
             },
             partials: {
-                partial: 'partial-index',
+                partial: 'partial-create-presentation',
                 nav: 'partial-nav-home'
                 
             }

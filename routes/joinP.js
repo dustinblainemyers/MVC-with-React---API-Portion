@@ -6,12 +6,11 @@ const express = require('express'),
 
         res.render('template', {
             locals: {
-                title: 'Home'
+                title: 'Join Presentation'
             },
             partials: {
-                partial: 'partial-index',
+                partial: 'partial-join-presentation',
                 nav: 'partial-nav-home'
-                
             }
         })
         

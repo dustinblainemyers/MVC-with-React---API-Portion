@@ -15,8 +15,10 @@ app.listen(3333, () => {
 })
 
 const rootController = require('./routes/index')
-const aboutController = require('./routes/login')
+const createPController = require('./routes/createP')
+const joinPController = require(`./routes/joinP`)
 
 app.use('/', rootController);
-app.use('/', aboutController);
+app.use('/create-presentation', createPController);
+app.use('/join-presentation', joinPController);
 
