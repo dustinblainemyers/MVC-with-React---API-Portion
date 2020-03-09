@@ -4,10 +4,13 @@ app = express();
 const path = require('path');
 app.use('/css',express.static(path.join(__dirname, 'public/css')));
 
+//middle ware
 app.engine('html',es6Renderer);
 app.set('views', 'views');
 app.set('view engine', 'html');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 
 app.listen(3333, () => {
@@ -17,6 +20,7 @@ app.listen(3333, () => {
 const rootController = require('./routes/index')
 const createPController = require('./routes/createP')
 const joinPController = require(`./routes/joinP`)
+
 
 app.use('/', rootController);
 app.use('/create-presentation', createPController);

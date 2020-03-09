@@ -13,8 +13,26 @@
             <h1>Create Presentation</h1>
             <p>Create A Presentation Here  </p>
             <div class="conceptdiv">
-            <!-- <img src="dribble_concept.jpg"> -->
+         
+        <form action="/create-presentation/generate" method="POST" class="form clearfix">
+            <div class="field">
+                <div class="control">
+                    <label class="label"> Instructor
+                        <input class="input" name="instructor" type="text" placeholder="instructor"/>
+                    </label>
+                </div>
             </div>
+            <div class="field">
+                <div class="control">
+                    <label class="label"> Presentation Name
+                        <input class="input" name="presentation_name" type="text" placeholder="presentation_name"/>
+                    </label>
+                </div>
+            </div>
+            <button class="button is-primary" type="submit">Create Presentation</button>
+
+        <form>
+        </div>
             
         </div>
     

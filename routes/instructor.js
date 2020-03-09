@@ -1,8 +1,8 @@
 const express = require('express'),
-   router = express.Router(),
-   joinPresentation = require('../models/presentation');
-   
-   router.get('/', async (req, res) => {
+   router = express.Router();
+  
+
+   router.get('/instructor', async (req, res) => {
     const data = await joinPresentation.getAllPresentations();
     console.log("all presentations", data )
     console.log("data", data);
@@ -18,9 +18,11 @@ const express = require('express'),
             }
         })
         
-    })
-   
-
-
+})
 
    module.exports = router
+
+
+
+
+
