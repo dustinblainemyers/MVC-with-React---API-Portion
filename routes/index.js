@@ -4,17 +4,6 @@ const express = require('express'),
 
    router.get('/', (req, res) => {
 
-        res.render('template', {
-            locals: {
-                title: 'Home'
-            },
-            partials: {
-                partial: 'partial-index',
-                nav: 'partial-nav-home'
-                
-            }
-        })
-        
-})
+        res.send("Green Light Red Light").status(200);
 
    module.exports = router
