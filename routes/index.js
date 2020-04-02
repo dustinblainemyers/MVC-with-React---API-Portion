@@ -5,5 +5,7 @@ const express = require('express'),
    router.get('/', (req, res) => {
 
         res.send("Green Light Red Light").status(200);
+   })
+
 
    module.exports = router
