@@ -7,18 +7,8 @@ const express = require('express'),
     console.log("all presentations", data )
     console.log("data", data);
 
-        res.render('template', {
-            locals: {
-                title: 'Join Presentation',
-                data: data
-            },
-            partials: {
-                partial: 'partial-join-presentation',
-                nav: 'partial-nav-home'
-            }
-        })
-        
-    })
+        res.send(data);
+   });
    
 
 
