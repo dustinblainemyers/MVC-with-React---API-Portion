@@ -2,6 +2,20 @@ const express = require('express'),
 es6Renderer = require('express-es6-template-engine'),
 app = express();
 const path = require('path');
+cors = require("cors");
+
+
+const corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept"
+  };
+
+app.use(cors(corsOptions));
 app.use('/css',express.static(path.join(__dirname, 'public/css')));
 
 //middle ware
