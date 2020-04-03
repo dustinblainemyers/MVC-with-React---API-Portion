@@ -18,6 +18,16 @@ class Presentation {
     }
   }
 
+  static async getPresentationByUserId(lesson_id) {
+    try {
+      const response = await db.any(`SELECT * FROM test_lesson WHERE id = ${lesson_id};`);
+      return response;
+    } catch (error) {
+      console.error("ERROR:", error);
+      return error;
+    }
+  }
+
   
 
   static async addLesson(lesson_name, instructor) {
