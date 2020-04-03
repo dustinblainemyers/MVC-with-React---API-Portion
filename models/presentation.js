@@ -18,6 +18,8 @@ class Presentation {
     }
   }
 
+  
+
   static async addLesson(lesson_name, instructor) {
     try {
       const response = await db.one(

@@ -1,10 +1,11 @@
 const express = require('express'),
    router = express.Router(),
-   joinPresentation = require('../models/presentation');
+   lights = require('../models/lights');
    
-   router.get('/', async (req, res) => {
-    const data = await joinPresentation.getAllPresentations();
-    console.log("all presentations", data )
+   router.get('/:user_id?', async (req, res) => {
+    const user_id = req.params.user_id;
+    const data = await lights.getLightByUserId(user_id);
+   
     console.log("data", data);
 
         res.send(data);

@@ -34,9 +34,11 @@ app.listen(3333, () => {
 const rootController = require('./routes/index')
 const createPController = require('./routes/create-presentation')
 const joinPController = require(`./routes/join-presentation`)
+const userController = require(`./routes/users`)
 
 
 app.use('/', rootController);
 app.use('/create-presentation', createPController);
 app.use('/join-presentation', joinPController);
+app.use('/users', userController);
 
