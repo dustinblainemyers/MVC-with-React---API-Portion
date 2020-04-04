@@ -18,7 +18,18 @@ class Presentation {
     }
   }
 
-//lesson_name, instructor
+  static async getPresentationByUserId(lesson_id) {
+    try {
+      const response = await db.any(`SELECT * FROM test_lesson WHERE id = ${lesson_id};`);
+      return response;
+    } catch (error) {
+      console.error("ERROR:", error);
+      return error;
+    }
+  }
+
+  
+
   static async addLesson(lesson_name, instructor) {
     try {
       const response = await db.one(
@@ -34,44 +45,7 @@ class Presentation {
     }
   }
 
-//   static async getById(id) {
-//     try {
-//       const response = await db.any(`SELECT * FROM albums WHERE id = ${id} `);
-//       return response;
-//     } catch (error) {
-//       console.error("Error", error);
-//     }
-//   }
 
-//   static async addReview(lesson_name, instructor) {
-//     try {
-//       const response = await db.one(
-//         `INSERT INTO reviews (users_id, album_id, title, review, stars)
-//                 VALUES ($1,$2,$3,$4,$5) RETURNING id`,
-//         [1, lesson_name, instructor, 5]
-//       );
-//       console.log(response);
-//       return response;
-//     } catch (error) {
-//       console.log("Error:", error);
-//       return error;
-//     }
-//   }
-
-//   static async getAllReviewsByID(albumID) {
-//     // get all the reviews for a given restaurant given a specific restaurant id .
-//     try {
-//       const response = await db.any(
-//         `select albums.name_album , reviews.title , reviews.stars, reviews.review, users.first_name 
-//                 from albums   inner join  reviews on albums.id = reviews.album_id 
-//                 inner join users on users.id = reviews.users_id WHERE reviews.album_id = ${albumID}`
-//       );
-//       return response;
-//     } catch (error) {
-//       console.error("ERROR:", error);
-//       return error;
-//     }
-//   }
 }
 
 module.exports = Presentation;
