@@ -21,6 +21,15 @@ const express = require('express'),
         res.send(data);
    });
 
+   router.get('/happypath/reallyhappy', async (req, res) => {
+    
+    const data = await lights.happyPath();
+   
+    console.log("data", data);
+
+        res.send(data);
+   });
+
 
    
 
