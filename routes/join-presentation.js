@@ -2,9 +2,9 @@ const express = require('express'),
    router = express.Router(),
    lights = require('../models/lights');
    
-   router.get('/:user_id?', async (req, res) => {
-    const user_id = req.params.user_id;
-    const data = await lights.getLightByUserId(user_id);
+   router.get('/:user_email', async (req, res) => {
+    const user_email = req.params.user_email;
+    const data = await lights.getLightByUserId(user_email);
    
     console.log("data", data);
 
