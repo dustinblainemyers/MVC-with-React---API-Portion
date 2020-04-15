@@ -29,6 +29,16 @@ class Users {
     }
   }
 
+  static async getUser() {
+    try {
+      const response = await db.one(`SELECT * FROM users WHERE email = '${email}'`);
+      return response;
+    } catch (error) {
+      console.error("ERROR:", error);
+      return error;
+    }
+  }
+
   
   
 
