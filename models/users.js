@@ -16,11 +16,11 @@ class Users {
     }
   }
 
-  async addUser() {
+  static async addUser(email) {
     try {
       const response = await db.one(
-        `INSERT INTO users (email) VALUES ($1) RETURNING id;`,
-        [this.email]
+        `INSERT INTO users (email) VALUES ($1) RETURNING id , email;`,
+        [email]
       );
       return response;
     } catch (error) {
@@ -29,7 +29,7 @@ class Users {
     }
   }
 
-  static async getUser() {
+  static async getUser(email) {
     try {
       const response = await db.one(`SELECT * FROM users WHERE email = '${email}'`);
       return response;
