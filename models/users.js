@@ -1,11 +1,9 @@
 const db = require("./conn");
 
 class Users {
-  constructor(id, lesson_name, instructor, lesson_href) {
+  constructor(id, email) {
     this.id = id;
-    this.lesson_name = lesson_name;
-    this.instructor = instructor;
-    this.lesson_href = lesson_href;
+    this.email = email;
   }
 
   static async getAllUsers() {
@@ -14,6 +12,19 @@ class Users {
       return response;
     } catch (error) {
       console.error("ERROR:", error);
+      return error;
+    }
+  }
+
+  async addUser() {
+    try {
+      const response = await db.one(
+        `INSERT INTO users (email) VALUES ($1) RETURNING id;`,
+        [this.email]
+      );
+      return response;
+    } catch (error) {
+      console.error("ERROR: ", error);
       return error;
     }
   }
