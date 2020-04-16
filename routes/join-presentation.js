@@ -30,6 +30,24 @@ const express = require('express'),
         res.send(data);
    });
 
+   router.post("/generate", async function(req, res, next) {
+    console.log("req body:", req.body);
+    const { instructor, presentation_name } = req.body;
+    const lessonData = await lights.addLesson(presentation_name, instructor)
+    console.log(lessonData)
+    res.sendStatus(200);
+  
+  });
+
+ 
+  router.put('/lights/togglelight/:light_id?', async (req, res) => {
+    const light_id = req.params.light_id;
+    const data = await lights.toggleLight(light_id);
+   
+    console.log("data", data);
+
+        res.send(data);
+   });
 
    
 

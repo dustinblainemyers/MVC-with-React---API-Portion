@@ -19,6 +19,15 @@ const express = require('express'),
             // user.addUser();
             // res.status(200).redirect("/");
           });
+
+          router.get('/:user_email', async (req, res) => {
+            const user_email = req.params.user_email;
+            const data = await createPresentation.getHostedByUserEmail(user_email);
+           
+            console.log("data", data);
+        
+                res.send(data);
+           });
         
 
 
