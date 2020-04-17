@@ -23,3 +23,17 @@ select distinct test_lesson.lesson_name
 UPDATE lights
 SET green_light = NOT green_light
 WHERE id = 11
+
+
+-- get a count of the number of lights in a lesson
+
+select COUNT(lights.green_light)
+      from lights 
+       WHERE lights.lesson_id = 7
+
+
+-- after the previous count , get the number of green lights:
+
+select COUNT(lights.green_light)
+from lights 
+WHERE lights.lesson_id = 7 AND lights.green_light = TRUE

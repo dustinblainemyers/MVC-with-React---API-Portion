@@ -68,6 +68,30 @@ class Lights {
       return error;
     }
   }
+
+  static async aggregateCountAll(lesson_id) {
+    try {
+      const response = await db.any(`select COUNT(lights.green_light)
+      from lights 
+       WHERE lights.lesson_id =  ${lesson_id}`);             
+      return response;
+    } catch (error) {
+      console.error("ERROR:", error);
+      return error;
+    }
+  }
+
+  static async aggregateCountGreen(lesson_id) {
+    try {
+      const response = await db.any(`select COUNT(lights.green_light)
+      from lights 
+      WHERE lights.lesson_id =  ${lesson_id} lights.green_light = TRUE`);             
+      return response;
+    } catch (error) {
+      console.error("ERROR:", error);
+      return error;
+    }
+  }
   
 
 }
