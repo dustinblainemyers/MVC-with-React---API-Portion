@@ -30,7 +30,7 @@ class Presentation {
 
   static async getHostedByUserEmail(user_email) {
     try {
-      const response = await db.any(`select distinct test_lesson.lesson_name 
+      const response = await db.any(`select distinct test_lesson.lesson_name ,test_lesson.id
       from test_lesson   
       inner join users on test_lesson.instructor = users.id WHERE users.email = '${user_email}'`);
       return response;

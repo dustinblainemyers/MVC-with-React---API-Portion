@@ -31,14 +31,17 @@ app.use(express.urlencoded({ extended: false }));
 
 const server = http.createServer(app);
 
-const io = socketIo(server); // < Interesting!
+const io = socketIo(server); 
 
-const getApiAndEmit = async socket => {
+
+const getApiAndEmit = async (socket, token) => {
   try {
     const res = await axios.get(
-      "http://localhost:3333/create-presentation/test@test.com"
+      
+      `http://localhost:3333/join-presentation/aggregate/countall/${token}`
     ); 
     socket.emit("FromAPI", res.data); 
+   
   } catch (error) {
     console.error(`Error: ${error.code}`);
   }
@@ -47,11 +50,12 @@ const getApiAndEmit = async socket => {
 let interval;
 
 io.on("connection", socket => {
-  console.log("New client connected");
+  let token = socket.handshake.query.token;
+  console.log("New client connected",token);
   if (interval) {
     clearInterval(interval);
   }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
+  interval = setInterval(() => getApiAndEmit(socket, token), 10000);
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
