@@ -85,7 +85,7 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-      WHERE lights.lesson_id =  ${lesson_id} lights.green_light = TRUE`);             
+      WHERE lights.lesson_id =  ${lesson_id} AND lights.green_light = TRUE`);             
       return response;
     } catch (error) {
       console.error("ERROR:", error);

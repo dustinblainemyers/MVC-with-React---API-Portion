@@ -30,6 +30,31 @@ const express = require('express'),
         res.send(data);
    });
 
+
+   router.get('/aggregate/countall', async (req, res) => {
+    
+    let countAll = await lights.aggregateCountAll(7);
+    let countGreen = await lights.aggregateCountGreen(7)
+    let lightColor;
+    
+   const allNumber =  parseInt(countAll[0].count);
+   const greenNumber =  parseInt(countGreen[0].count)
+    console.log("all ", countAll)
+    console.log("green ", countGreen)
+    console.log("all count", allNumber)
+    console.log("green count", greenNumber)
+    
+     if(greenNumber / allNumber >= .5 ) {
+       lightColor = "Green";
+
+    } else {
+      lightColor = "Red";
+    }
+    console.log("lightcolor", lightColor)
+
+        res.send(lightColor);
+   });
+
    router.post("/generate", async function(req, res, next) {
     console.log("req body:", req.body);
     const { instructor, presentation_name } = req.body;
