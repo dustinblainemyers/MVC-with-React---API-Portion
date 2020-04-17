@@ -13,7 +13,7 @@ const express = require('express'),
    
 
    router.get('presentation-by-light/:lesson_id?', async (req, res) => {
-    const lesson_id = req.params.user_id;
+    const lesson_id = req.params.lesson_id;
     const data = await lights.getPresentationByUserId(lesson_id);
    
     console.log("data", data);
@@ -31,10 +31,10 @@ const express = require('express'),
    });
 
 
-   router.get('/aggregate/countall', async (req, res) => {
-    
-    let countAll = await lights.aggregateCountAll(7);
-    let countGreen = await lights.aggregateCountGreen(7)
+   router.get('/aggregate/countall/:lesson_id?', async (req, res) => {
+    const lesson_id = req.params.lesson_id;
+    let countAll = await lights.aggregateCountAll(lesson_id);
+    let countGreen = await lights.aggregateCountGreen(lesson_id)
     let lightColor;
     
    const allNumber =  parseInt(countAll[0].count);
