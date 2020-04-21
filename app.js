@@ -55,7 +55,7 @@ io.on("connection", socket => {
   if (interval) {
     clearInterval(interval);
   }
-  interval = setInterval(() => getApiAndEmit(socket, token), 10000);
+  interval = setInterval(() => getApiAndEmit(socket, token), 15000);
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
@@ -71,10 +71,14 @@ const rootController = require('./routes/index')
 const createPController = require('./routes/create-presentation')
 const joinPController = require(`./routes/join-presentation`)
 const userController = require(`./routes/users`)
+const miscController = require(`./routes/misc-endpoints`)
 
 
 app.use('/', rootController);
+
 app.use('/create-presentation', createPController);
 app.use('/join-presentation', joinPController);
 app.use('/users', userController);
+app.use('/misc-endpoints', miscController);
+
 

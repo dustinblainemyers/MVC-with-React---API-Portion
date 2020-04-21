@@ -13,11 +13,6 @@ const express = require('express'),
           
             
           
-            // const user = new UserModel(null , lesson_name, instructor, null );
-            // presentation url set to null for now. once id is returned it 
-            // will be of format join-presentation/student/${entry.id}
-            // user.addUser();
-            // res.status(200).redirect("/");
           });
 
           router.get('/:user_email', async (req, res) => {

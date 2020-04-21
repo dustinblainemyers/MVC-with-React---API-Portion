@@ -12,14 +12,8 @@ const express = require('express'),
    });
    
 
-   router.get('presentation-by-light/:lesson_id?', async (req, res) => {
-    const lesson_id = req.params.lesson_id;
-    const data = await lights.getPresentationByUserId(lesson_id);
-   
-    console.log("data", data);
 
-        res.send(data);
-   });
+   
 
    router.get('/happypath/reallyhappy', async (req, res) => {
     
@@ -73,6 +67,18 @@ const express = require('express'),
 
         res.send(data);
    });
+
+
+   router.get('presentation-by-light/:lesson_id?', async (req, res) => {
+    const lesson_id = req.params.lesson_id;
+    const data = await lights.getPresentationByUserId(lesson_id);
+   
+    console.log("data", data);
+
+        res.send(data);
+   });
+
+   
 
    
 
