@@ -44,12 +44,11 @@ class Lights {
     }
   }
 
-
   static async viewUnjoined(users_id) {
     try {
       const response = await db.any(` select distinct test_lesson.lesson_name 
       from test_lesson   inner join  lights on test_lesson.id = lights.lesson_id
-      inner join users on lights.users_id = users.id WHERE users.id != ${users_id}`);
+      inner join users on lights.users_id = users.id WHERE users.email != '${users_id}'`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
@@ -73,7 +72,7 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-       WHERE lights.lesson_id =  ${lesson_id}`);             
+       WHERE lights.lesson_id =  ${lesson_id}`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
@@ -85,15 +84,13 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-      WHERE lights.lesson_id =  ${lesson_id} AND lights.green_light = TRUE`);             
+      WHERE lights.lesson_id =  ${lesson_id} AND lights.green_light = TRUE`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
       return error;
     }
   }
-  
-
 }
 
 module.exports = Lights;
