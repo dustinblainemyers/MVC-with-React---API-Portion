@@ -44,11 +44,11 @@ class Lights {
     }
   }
 
-  static async viewUnjoined(users_id) {
+  static async viewUnjoined(user_email) {
     try {
       const response = await db.any(` select distinct test_lesson.lesson_name 
       from test_lesson   inner join  lights on test_lesson.id = lights.lesson_id
-      inner join users on lights.users_id = users.id WHERE users.email != '${users_id}'`);
+      inner join users on lights.users_id = users.id WHERE users.email != '${user_email}'`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
