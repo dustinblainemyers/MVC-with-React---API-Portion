@@ -20,7 +20,9 @@ class Presentation {
 
   static async getPresentationByUserId(lesson_id) {
     try {
-      const response = await db.any(`SELECT * FROM test_lesson WHERE id = ${lesson_id};`);
+      const response = await db.any(
+        `SELECT * FROM test_lesson WHERE id = ${lesson_id};`
+      );
       return response;
     } catch (error) {
       console.error("ERROR:", error);
@@ -30,7 +32,7 @@ class Presentation {
 
   static async getHostedByUserEmail(user_email) {
     try {
-      const response = await db.any(`select distinct test_lesson.lesson_name ,test_lesson.id
+      const response = await db.any(`select distinct test_lesson.lesson_name ,test_lesson.id, test_lesson.instructor
       from test_lesson   
       inner join users on test_lesson.instructor = users.id WHERE users.email = '${user_email}'`);
       return response;
@@ -40,14 +42,12 @@ class Presentation {
     }
   }
 
-  
-
-  static async addLesson(lesson_name, instructor) {
+  static async addLesson(lesson_name, email) {
     try {
       const response = await db.one(
-        `INSERT INTO test_lesson (name, instructor)
+        `INSERT INTO test_lesson (lesson_name, instructor)
                 VALUES ($1,$2) RETURNING id`,
-        [lesson_name, instructor]
+        [lesson_name, email]
       );
       console.log(response);
       return response;
@@ -56,8 +56,6 @@ class Presentation {
       return error;
     }
   }
-
-
 }
 
 module.exports = Presentation;
