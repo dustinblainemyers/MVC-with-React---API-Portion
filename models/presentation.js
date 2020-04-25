@@ -42,12 +42,12 @@ class Presentation {
     }
   }
 
-  static async addLesson(lesson_name, email) {
+  static async addLesson(lesson_name, email, access_key) {
     try {
       const response = await db.one(
-        `INSERT INTO test_lesson (lesson_name, instructor)
-                VALUES ($1,$2) RETURNING id`,
-        [lesson_name, email]
+        `INSERT INTO test_lesson (lesson_name, instructor, access_key)
+                VALUES ($1,$2,$3) RETURNING id, access_key`,
+        [lesson_name, email, access_key]
       );
       console.log(response);
       return response;

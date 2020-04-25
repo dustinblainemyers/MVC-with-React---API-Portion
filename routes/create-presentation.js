@@ -15,9 +15,11 @@ router.post("/generate/hello", async function (req, res, next) {
   console.log("req body:", req.body);
   const { presentation_name } = req.body;
   const { email } = req.body;
+  const { accessKey } = req.body;
   const lessonData = await createPresentation.addLesson(
     presentation_name,
-    email
+    email,
+    accessKey
   );
   console.log(lessonData);
 
