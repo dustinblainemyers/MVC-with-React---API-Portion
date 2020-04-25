@@ -56,6 +56,21 @@ class Presentation {
       return error;
     }
   }
+
+  static async deleteLesson(lesson_id) {
+    try {
+      const response = await db.one(
+        `DELETE FROM test_lesson 
+        WHERE id = ${lesson_id}`,
+        [lesson_id]
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log("Error:", error);
+      return error;
+    }
+  }
 }
 
 module.exports = Presentation;
