@@ -32,11 +32,13 @@ class Lights {
     }
   }
 
-  static async addLight() {
+  static async addLight(users_id, access_key) {
     try {
-      const response = await db.any(` select test_lesson.lesson_name , users.name , lights.green_light
-      from test_lesson   inner join  lights on test_lesson.access_key = lights.access_key
-      inner join users on lights.users_id = users.id `);
+      const response = await db.any(` INSERT INTO lights (users_id,access_key, green_light)
+
+      VALUES (${users_id}, '${access_key}', TRUE);
+      
+       `);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
