@@ -11,7 +11,7 @@ class Lights {
   static async getLightByUserId(user_email) {
     try {
       const response = await db.any(` select test_lesson.lesson_name , users.name , lights.green_light, lights.id
-      from test_lesson   inner join  lights on test_lesson.id = lights.lesson_id
+      from test_lesson   inner join  lights on test_lesson.access_key = lights.access_key
       inner join users on lights.users_id = users.id WHERE users.email = '${user_email}'; `);
       return response;
     } catch (error) {
@@ -23,7 +23,7 @@ class Lights {
   static async happyPath() {
     try {
       const response = await db.any(` select test_lesson.lesson_name , users.name , lights.green_light
-      from test_lesson   inner join  lights on test_lesson.id = lights.lesson_id
+      from test_lesson   inner join  lights on test_lesson.access_key = lights.access_key
       inner join users on lights.users_id = users.id `);
       return response;
     } catch (error) {
@@ -35,7 +35,7 @@ class Lights {
   static async addLight() {
     try {
       const response = await db.any(` select test_lesson.lesson_name , users.name , lights.green_light
-      from test_lesson   inner join  lights on test_lesson.id = lights.lesson_id
+      from test_lesson   inner join  lights on test_lesson.access_key = lights.access_key
       inner join users on lights.users_id = users.id `);
       return response;
     } catch (error) {
@@ -47,7 +47,7 @@ class Lights {
   static async viewUnjoined(user_email) {
     try {
       const response = await db.any(` select distinct test_lesson.lesson_name 
-      from test_lesson   inner join  lights on test_lesson.id = lights.lesson_id
+      from test_lesson   inner join  lights on test_lesson.access_key = lights.access_key
       inner join users on lights.users_id = users.id WHERE users.email != '${user_email}'`);
       return response;
     } catch (error) {
@@ -72,7 +72,7 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-       WHERE lights.lesson_id =  ${lesson_id}`);
+       WHERE lights.access_key =  ${lesson_id}`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
@@ -84,7 +84,7 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-      WHERE lights.lesson_id =  ${lesson_id} AND lights.green_light = TRUE`);
+      WHERE lights.access_key =  ${lesson_id} AND lights.green_light = TRUE`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
