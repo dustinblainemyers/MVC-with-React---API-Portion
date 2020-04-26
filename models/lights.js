@@ -98,8 +98,7 @@ class Lights {
     try {
       const response = await db.one(
         `DELETE FROM lights 
-        WHERE access_key = '${access_key}' AND users_id = ${users_id}`,
-        [lesson_id]
+        WHERE access_key = '${access_key}' AND users_id = ${users_id}`
       );
       console.log(response);
       return response;
