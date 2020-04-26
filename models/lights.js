@@ -10,7 +10,7 @@ class Lights {
 
   static async getLightByUserId(user_email) {
     try {
-      const response = await db.any(` select test_lesson.lesson_name , users.name , lights.green_light, lights.id
+      const response = await db.any(` select test_lesson.lesson_name ,test_lesson.access_key, users.name , lights.green_light, lights.id
       from test_lesson   inner join  lights on test_lesson.access_key = lights.access_key
       inner join users on lights.users_id = users.id WHERE users.email = '${user_email}'; `);
       return response;
@@ -90,6 +90,21 @@ class Lights {
       return response;
     } catch (error) {
       console.error("ERROR:", error);
+      return error;
+    }
+  }
+
+  static async leaveLesson(access_key, users_id) {
+    try {
+      const response = await db.one(
+        `DELETE FROM lights 
+        WHERE access_key = '${access_key}' AND users_id = ${users_id}`,
+        [lesson_id]
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log("Error:", error);
       return error;
     }
   }

@@ -50,6 +50,16 @@ router.post("/generate", async function (req, res, next) {
   res.sendStatus(200);
 });
 
+router.delete("/delete", async function (req, res, next) {
+  console.log("req body:", req.body);
+  const { users_id } = req.body;
+  const { access_key } = req.body;
+  const lessonData = await lights.leaveLesson(access_key, users_id);
+  console.log(lessonData);
+
+  res.sendStatus(200);
+});
+
 router.put("/lights/togglelight/:light_id?", async (req, res) => {
   const light_id = req.params.light_id;
   const data = await lights.toggleLight(light_id);
