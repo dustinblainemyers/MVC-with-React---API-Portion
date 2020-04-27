@@ -62,7 +62,7 @@ class Lights {
     try {
       const response = await db.any(` UPDATE lights
       SET green_light = NOT green_light
-      WHERE id = ${light_id}`);
+      WHERE access_key = '${light_id}'`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
