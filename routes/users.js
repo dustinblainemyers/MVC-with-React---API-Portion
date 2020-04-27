@@ -10,7 +10,17 @@ const express = require('express'),
         res.send(data);
    });
    
-
+   router.get('/:user_email?', async (req, res) => {
+       const user_email = req.params.user_email;
+       let data = await Users.getUser(user_email)
+    //    console.log("searched user", data)
+       if(data.name === 'QueryResultError') {
+           data = await Users.addUser(user_email)
+           console.log("added user", data)
+       }
+       
+       res.send(data);
+   });
 
 
    module.exports = router

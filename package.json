@@ -13,9 +13,11 @@
   "author": "Dustin Myers",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-es6-template-engine": "^2.2.1",
-    "pg-promise": "^10.4.4"
+    "pg-promise": "^10.4.4",
+    "socket.io": "^2.3.0"
   }
 }
