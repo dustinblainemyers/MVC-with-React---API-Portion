@@ -6,10 +6,9 @@ const socketIo = require("socket.io");
 const axios = require("axios");
 const path = require("path");
 cors = require("cors");
-const dotenv = require("dotenv");
-dotenv.config();
+const config = require("./config");
 
-const port = process.env.PORT;
+const { port } = config;
 console.log(`Your port is ${port}`);
 
 const corsOptions = {
