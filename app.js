@@ -5,7 +5,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const axios = require("axios");
 const path = require("path");
-cors = require("cors");
+const cors = require("cors");
 const config = require("./config");
 
 const { port } = config;
