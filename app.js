@@ -39,7 +39,7 @@ const io = socketIo(server);
 const getApiAndEmit = async (socket, token) => {
   try {
     const res = await axios.get(
-      `http://localhost:3333/join-presentation/aggregate/countall/${token}`
+      `${socketio}/join-presentation/aggregate/countall/${token}`
     );
 
     socket.emit("FromAPI", res.data);
