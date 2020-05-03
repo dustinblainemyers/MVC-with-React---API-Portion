@@ -9,6 +9,7 @@ const cors = require("cors");
 const config = require("./config");
 
 const { port } = config;
+const { socketio } = config;
 console.log(`Your port is ${port}`);
 
 const corsOptions = {
@@ -37,6 +38,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 const getApiAndEmit = async (socket, token) => {
+  console.log("socket io", socketio);
   try {
     const res = await axios.get(
       `${socketio}/join-presentation/aggregate/countall/${token}`
