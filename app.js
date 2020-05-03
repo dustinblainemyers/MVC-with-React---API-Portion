@@ -48,16 +48,24 @@ const getApiAndEmit = async (socket, token) => {
   }
 };
 
-let interval;
+let intervals = [];
 
 io.on("connection", (socket) => {
   let token = socket.handshake.query.token;
   console.log("New client connected", token);
 
-  interval = setInterval(() => getApiAndEmit(socket, token), 1500);
+  intervals.push({
+    token: token,
+    interval: setInterval(() => getApiAndEmit(socket, token), 1500),
+  });
+  console.log(intervals);
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
-    clearInterval(interval);
+    console.log("Client disconnected", token);
+    intervals.map((interval) => {
+      if (interval.token === token) {
+        clearInterval(interval.interval);
+      }
+    });
   });
 });
 
