@@ -74,7 +74,7 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-       WHERE lights.access_key =  ${lesson_id}`);
+       WHERE lights.access_key =  '${lesson_id}'`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
@@ -86,7 +86,7 @@ class Lights {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-      WHERE lights.access_key =  ${lesson_id} AND lights.green_light = TRUE`);
+      WHERE lights.access_key =  '${lesson_id}' AND lights.green_light = TRUE`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
