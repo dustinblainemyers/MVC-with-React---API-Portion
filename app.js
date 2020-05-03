@@ -41,6 +41,7 @@ const getApiAndEmit = async (socket, token) => {
     const res = await axios.get(
       `http://localhost:3333/join-presentation/aggregate/countall/${token}`
     );
+
     socket.emit("FromAPI", res.data);
   } catch (error) {
     console.error(`Error: ${error.code}`);
@@ -52,12 +53,11 @@ let interval;
 io.on("connection", (socket) => {
   let token = socket.handshake.query.token;
   console.log("New client connected", token);
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket, token), 15000);
+
+  interval = setInterval(() => getApiAndEmit(socket, token), 1500);
   socket.on("disconnect", () => {
     console.log("Client disconnected");
+    clearInterval(interval);
   });
 });
 
