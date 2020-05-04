@@ -45,22 +45,29 @@ const getApiAndEmit = async (socket, token) => {
     );
 
     socket.emit("FromAPI", res.data);
+    console.log("websocket size", JSON.stringify(res.data).length);
+    console.log("data packet", res.data);
   } catch (error) {
     console.error(`Error: ${error.code}`);
   }
 };
-
+let heartbeat = 10000;
 let intervals = [];
 
 io.on("connection", (socket) => {
   let token = socket.handshake.query.token;
-  console.log("New client connected", token);
 
+  // need to make the setInterval interval an environment variable so I can edit it on the fly on demo day.
   intervals.push({
     token: token,
-    interval: setInterval(() => getApiAndEmit(socket, token), 15000),
+    interval: setInterval(() => getApiAndEmit(socket, token), heartbeat),
   });
-  console.log(intervals);
+  heartbeat = heartbeat * interval.length;
+
+  //the below needs to be removed on demo day
+  if (interval.length > 15) {
+    clearInterval(interval.interval);
+  }
   socket.on("disconnect", () => {
     console.log("Client disconnected", token);
     intervals.map((interval) => {
