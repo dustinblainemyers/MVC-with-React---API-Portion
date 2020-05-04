@@ -58,11 +58,11 @@ class Lights {
     }
   }
 
-  static async toggleLight(light_id) {
+  static async toggleLight(access_key) {
     try {
       const response = await db.any(` UPDATE lights
       SET green_light = NOT green_light
-      WHERE access_key = '${light_id}'`);
+      WHERE id = '${access_key}'`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
@@ -70,11 +70,11 @@ class Lights {
     }
   }
 
-  static async aggregateCountAll(lesson_id) {
+  static async aggregateCountAll(access_key) {
     try {
       const response = await db.any(`select COUNT(lights.green_light)
       from lights 
-       WHERE lights.access_key =  '${lesson_id}'`);
+       WHERE lights.access_key =  '${access_key}'`);
       return response;
     } catch (error) {
       console.error("ERROR:", error);
