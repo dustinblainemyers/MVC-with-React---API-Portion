@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
 
   intervals.push({
     token: token,
-    interval: setInterval(() => getApiAndEmit(socket, token), 1500),
+    interval: setInterval(() => getApiAndEmit(socket, token), 15000),
   });
   console.log(intervals);
   socket.on("disconnect", () => {
