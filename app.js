@@ -37,32 +37,51 @@ const server = http.createServer(app);
 
 const io = socketIo(server);
 
-const getApiAndEmit = async (socket, token) => {
-  console.log("socket io", socketio);
+const getApiAndEmit = async (socket, token, compareData) => {
   try {
-    const res = await axios.get(
+    let res = await axios.get(
       `${socketio}/join-presentation/aggregate/countall/${token}`
     );
-
-    socket.emit("FromAPI", res.data);
+    if (res.data !== compareData) {
+      dataChangeCount++;
+      console.log("compare data", compareData);
+      console.log("res data", res.data);
+      socket.emit("FromAPI", res.data);
+      console.log(
+        `Data has changed  times ${dataChangeCount}, sending to client`
+      );
+      intervals.map((interval) => {
+        if (interval.token === token) {
+          clearInterval(interval.interval);
+          interval.interval = setInterval(
+            () => getApiAndEmit(socket, token, res.data),
+            1000
+          );
+        }
+      });
+    }
   } catch (error) {
     console.error(`Error: ${error.code}`);
   }
 };
-
+let dataChangeCount = 0;
 let intervals = [];
 
 io.on("connection", (socket) => {
   let token = socket.handshake.query.token;
   console.log("New client connected", token);
-
+  const res = { data: null };
+  let dataChangeCount = 0;
   intervals.push({
     token: token,
-    interval: setInterval(() => getApiAndEmit(socket, token), 15000),
+    interval: setInterval(() => getApiAndEmit(socket, token, res.data), 1000),
+
+    //add a time limit here ?
   });
-  console.log(intervals);
+
   socket.on("disconnect", () => {
     console.log("Client disconnected", token);
+    dataChangeCount = 0;
     intervals.map((interval) => {
       if (interval.token === token) {
         clearInterval(interval.interval);

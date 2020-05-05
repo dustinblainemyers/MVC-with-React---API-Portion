@@ -27,10 +27,6 @@ router.get("/aggregate/countall/:lesson_id?", async (req, res) => {
 
   const allNumber = parseInt(countAll[0].count);
   const greenNumber = parseInt(countGreen[0].count);
-  console.log("all ", countAll);
-  console.log("green ", countGreen);
-  console.log("all count", allNumber);
-  console.log("green count", greenNumber);
 
   if (greenNumber / allNumber >= 0.5) {
     lightColor = "Green";
