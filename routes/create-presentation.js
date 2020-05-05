@@ -13,11 +13,11 @@ router.get("/:user_email", async (req, res) => {
 
 router.post("/generate/hello", async function (req, res, next) {
   console.log("req body:", req.body);
-  const { presentation_name } = req.body;
+  const { presentationName } = req.body;
   const { user_id } = req.body;
   const { accessKey } = req.body;
   const lessonData = await createPresentation.addLesson(
-    presentation_name,
+    presentationName,
     user_id,
     accessKey
   );
