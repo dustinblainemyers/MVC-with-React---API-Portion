@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
   let dataChangeCount = 0;
   intervals.push({
     token: token,
-    interval: setInterval(() => getApiAndEmit(socket, token, res.data), 1000),
+    interval: setInterval(() => getApiAndEmit(socket, token, res.data), 60000),
 
     //add a time limit here ?
   });
